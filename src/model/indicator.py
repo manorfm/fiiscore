@@ -14,6 +14,8 @@ class Indicator:
         return number
 
     def __toDecimal(self, value):
+        if isinstance(value, int | float):
+            return value
         decimalStr = re.sub(r"[R$|%|bi|mi|\.]", "", value).replace(',', '.')
         return self.__numberExpander(Decimal(decimalStr), value)
         

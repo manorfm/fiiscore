@@ -4,7 +4,7 @@ from src.model.indicator import Indicator
 from src.model.fii import FII
 from src.scrap.fii_not_fount_exception import FIINotFoundException
 
-class FundsExploorerScrapper:
+class FundsExplorerScrapper:
     __base = "https://www.fundsexplorer.com.br/funds/"
 
     def __getValue(self, div_indicator, class_):
