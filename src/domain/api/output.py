@@ -11,5 +11,5 @@ class FIIIndicatorOutput(OutputModel):
 
 class FIIOutput(OutputModel):
     name: str
-    indicators: list[FIIIndicatorOutput]
+    indicators: list[FIIIndicatorOutput] | None
     

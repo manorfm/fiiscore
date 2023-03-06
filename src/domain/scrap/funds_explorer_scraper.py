@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-from src.model.indicator import Indicator
-from src.model.fii import FII
-from src.scrap.fii_not_fount_exception import FIINotFoundException
+from src.domain.model.indicator import Indicator
+from src.domain.model.fii import FII
+from src.domain.scrap.fii_not_fount_exception import FIINotFoundException
 
 class FundsExplorerScrapper:
     __base = "https://www.fundsexplorer.com.br/funds/"

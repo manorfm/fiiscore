@@ -1,4 +1,4 @@
-from src.model.indicator import Indicator
+from src.domain.model.indicator import Indicator
 from decimal import Decimal 
 
 def testValueWithDotShouldRemoveit():

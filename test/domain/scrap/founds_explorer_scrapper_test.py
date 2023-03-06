@@ -1,4 +1,4 @@
-from src.scrap.funds_explorer_scraper import FundsExplorerScrapper
+from src.domain.scrap.funds_explorer_scraper import FundsExplorerScrapper
 
 def testGetHeaderOfFoundsExplorerScrapper():
     "should get the header of fii hgre11"
