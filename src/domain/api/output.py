@@ -5,11 +5,10 @@ class OutputModel(BaseModel):
     class Config:
         orm_mode = True
 
-class FIIIndicatorOutput(OutputModel):
-    name: str
-    value: Decimal
-
 class FIIOutput(OutputModel):
     name: str
-    indicators: list[FIIIndicatorOutput] | None
-    
+    price: float
+    lastIncome: float
+    dividendYield: float
+    pvp: float
+    score: float

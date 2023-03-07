@@ -21,10 +21,6 @@ class FIIService:
         mapToFiis = lambda fii : scrapper.execute(fii['name'])
 
         result = map(mapToFiis, fiis_collection)
-        return list(result)
-        
-        
-        
-
-        
-
+        fiis = list(result)
+        fiis.sort(key = lambda fii: fii.score(), reverse=True)
+        return fiis

@@ -17,5 +17,4 @@ class FIIRepository:
         with client:
             db = client.fii_manager
             cursor = db.fii.find({})
-            fiis = list(cursor)
-            return fiis
+            return list(cursor)
