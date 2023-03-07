@@ -1,5 +1,7 @@
 from src.domain.scrap.funds_explorer_scraper import FundsExplorerScrapper
 from src.domain.repository.fii_repository import FIIRepository
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 class FIIService:
     def save(self, fiiName: str):
@@ -18,9 +20,10 @@ class FIIService:
             return None
         
         scrapper = FundsExplorerScrapper()
-        mapToFiis = lambda fii : scrapper.execute(fii['name'])
+        scrap = lambda fii : scrapper.execute(fii['name'])
+        sort = lambda fii: fii.score()
 
-        result = map(mapToFiis, fiis_collection)
-        fiis = list(result)
-        fiis.sort(key = lambda fii: fii.score(), reverse=True)
-        return fiis
+        with ThreadPoolExecutor(max_workers=None) as executor:
+             fiis = list(executor.map(scrap, fiis_collection))
+             fiis.sort(key=sort, reverse=True)
+             return fiis
