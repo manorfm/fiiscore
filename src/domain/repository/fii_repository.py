@@ -3,6 +3,13 @@ from src.domain.model.fii import FII
 
 class FIIRepository:
     
+    def get(self, fii: FII) -> FII | None:
+        mongo = MongoConnection()
+        client = mongo.connect()
+        with client:
+            db = client.fii_manager
+            return db.fii.find_one({ "name": fii.name })
+
     def persist(self, fii: FII):
         mongo = MongoConnection()
         client = mongo.connect()

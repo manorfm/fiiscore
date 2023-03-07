@@ -7,8 +7,8 @@ class OutputModel(BaseModel):
 
 class FIIOutput(OutputModel):
     name: str
-    price: float
-    lastIncome: float
-    dividendYield: float
-    pvp: float
-    score: float
+    price: float | None = None
+    lastIncome: float | None = None
+    dividendYield: float | None = None
+    pvp: float | None = None
+    score: float | None = None

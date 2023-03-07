@@ -1,5 +1,6 @@
 from src.domain.scrap.funds_explorer_scraper import FundsExplorerScrapper
 from src.domain.repository.fii_repository import FIIRepository
+from src.domain.repository.fii_duplicated_exception import FIIDuplicatedException
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
@@ -9,6 +10,10 @@ class FIIService:
         fii = scrapper.execute(fiiName)
         
         repository = FIIRepository()
+      
+        if repository.get(fii) is not None:
+            raise FIIDuplicatedException(f"FII {fii.name} is duplicated!")
+        
         repository.persist(fii)
         return fii
 

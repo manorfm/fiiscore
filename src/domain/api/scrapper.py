@@ -3,20 +3,25 @@ from pydantic import BaseModel
 from src.domain.api.input import FIIInput
 from src.domain.api.output import FIIOutput
 from src.domain.service.fii_service import FIIService
+from src.domain.repository.fii_duplicated_exception import FIIDuplicatedException
 
 router = APIRouter()
 
 @router.post("/fii/scrap", tags=["fii"], status_code=201, response_model=FIIOutput, response_model_exclude_unset=True)
-async def add_fii(fii: FIIInput) -> FIIOutput:
+async def add_fii(fiiInput: FIIInput) -> FIIOutput:
     """scrap FII and persist it"""
     service = FIIService()
-    return service.save(fii.name)
+    fii = service.save(fiiInput.name.lower())
+    return to_response(fii)
 
 @router.get("/fii/scrap", tags=["fii"], status_code=200, response_model=list[FIIOutput] | None, response_model_exclude_unset=True)
 async def get_all_fiis() -> list[FIIOutput] | None:
     """scrap get all fiis persisted and scrap the indicators today"""
     service = FIIService()
     fiis = service.get_all_fii()
-    response = [*map(lambda fii: { **vars(fii), "score": fii.score() }, fiis)]
+    response = [*map(lambda fii: to_response(fii), fiis)]
     
     return response
+
+def to_response(fii):
+    return { **vars(fii), "score": fii.score() }
