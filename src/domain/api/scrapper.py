@@ -12,16 +12,16 @@ async def add_fii(fiiInput: FIIInput) -> FIIOutput:
     """scrap FII and persist it"""
     service = FIIService()
     fii = service.save(fiiInput.name.lower())
-    return to_response(fii)
+    return __to_response(fii)
 
 @router.get("/fii/scrap", tags=["fii"], status_code=200, response_model=list[FIIOutput] | None, response_model_exclude_unset=True)
 async def get_all_fiis() -> list[FIIOutput] | None:
-    """scrap get all fiis persisted and scrap the indicators today"""
+    """scrap load all fiis persisted and scrap the indicators from this day and ordered by score"""
     service = FIIService()
     fiis = service.get_all_fii()
-    response = [*map(lambda fii: to_response(fii), fiis)]
+    response = [*map(lambda fii: __to_response(fii), fiis)]
     
     return response
 
-def to_response(fii):
+def __to_response(fii):
     return { **vars(fii), "score": fii.score() }
