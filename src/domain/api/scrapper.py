@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from src.domain.api.input import FIIInput
 from src.domain.api.output import FIIOutput
 from src.domain.service.fii_service import FIIService
-from src.domain.repository.fii_duplicated_exception import FIIDuplicatedException
+from src.domain.service.fii_duplicated_exception import FIIDuplicatedException
 
 router = APIRouter()
 

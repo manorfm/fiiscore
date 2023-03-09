@@ -1,6 +1,6 @@
 from src.domain.scrap.funds_explorer_scraper import FundsExplorerScrapper
 from src.domain.repository.fii_repository import FIIRepository
-from src.domain.repository.fii_duplicated_exception import FIIDuplicatedException
+from src.domain.service.fii_duplicated_exception import FIIDuplicatedException
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 

@@ -4,7 +4,7 @@ from fastapi.responses import PlainTextResponse
 
 from src.domain.api.scrapper import add_fii
 from src.domain.api import scrapper
-from src.domain.repository.fii_duplicated_exception import FIIDuplicatedException
+from src.domain.service.fii_duplicated_exception import FIIDuplicatedException
 from src.domain.scrap.fii_not_fount_exception import FIINotFoundException
 
 app = FastAPI()
