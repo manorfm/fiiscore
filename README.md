@@ -2,7 +2,7 @@
 Aplicação para pontuar qual FII está melhor analisando alguns parâmentros fundamentais:
 
 
-> Quanto maior for o `último rendimento` e `dividend yield` melhor a pontuação se torna quando maior for `preco` e o `pvp` mais pra baixo essa pontuação se torna, ou seja, > `preços` e `pvp` altos puxam a pontuação para baixo e `último rendimento` e a percentagem de `dividendo yield` puxa a pontuação para cima.
+> Quanto maior for o `último rendimento` e `dividend yield` melhor a pontuação se torna quando maior for `preço` e o `pvp` mais pra baixo essa pontuação se torna, ou seja, > `preços` e `pvp` altos puxam a pontuação para baixo e `último rendimento` e a percentagem de `dividendo yield` puxa a pontuação para cima.
 
 <br>
 
