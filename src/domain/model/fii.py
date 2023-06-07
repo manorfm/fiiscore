@@ -1,15 +1,15 @@
 from decimal import Decimal
 class FII:
-    def __init__(self, name, price, lastIncome, dividendYield, pvp, forecast = 0.0):
+    def __init__(self, name, price, lastIncome, dividendYield, pvp, forecast: float = 0.0):
         self.name = name
-        self.price = price
-        self.lastIncome = lastIncome
-        self.dividendYield = dividendYield
-        self.pvp = pvp
+        self.price = float(price)
+        self.lastIncome = float(lastIncome)
+        self.dividendYield = float(dividendYield)
+        self.pvp = float(pvp)
 
         if (forecast > 0.0):
-            self.qnt: int = forecast//price
-            self.forecast = "R$ {:.2f}".format( self.qnt * lastIncome ) 
+            self.qnt: int = forecast // self.price
+            self.forecast = "R$ {:.2f}".format( self.qnt * self.lastIncome ) 
 
 
     def __str__(self):
