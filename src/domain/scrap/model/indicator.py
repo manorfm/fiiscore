@@ -19,7 +19,6 @@ class Indicator:
         if isinstance(value, int | float):
             return value
         decimalStr = re.sub(r"[R$|%|B|M|K|\.]", "", value).replace(',', '.')
-        print(f"opa {decimalStr} and {value}")
         return self.__numberExpander(Decimal(decimalStr), value)
         
     def __str__(self):
