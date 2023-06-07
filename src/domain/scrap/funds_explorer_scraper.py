@@ -33,7 +33,7 @@ class FundsExplorerScrapper:
         value = self.__getValue(fields[1])
         return Indicator(name, value)
 
-    def execute(self, fii):
+    def execute(self, fii, forecast: float = 0.0):
         page = self.__get_page(fii)
         div_indicators = self.__get_indicators(fii, page)
 
@@ -46,4 +46,4 @@ class FundsExplorerScrapper:
 
         indicators.append(Indicator("Price", price))
 
-        return FIIScrapped(fii, indicators).to_fii()
+        return FIIScrapped(fii, indicators, forecast).to_fii()

@@ -17,7 +17,7 @@ class FIIService:
         repository.persist(fii)
         return fii
 
-    def get_all_fii(self):
+    def get_all_fii_with_forecast(self, forecast: float = 0.0):
         repository = FIIRepository()
         fiis_collection = repository.get_all()
         
@@ -25,10 +25,13 @@ class FIIService:
             return None
         
         scrapper = FundsExplorerScrapper()
-        scrap = lambda fii : scrapper.execute(fii['name'])
+        scrap = lambda fii : scrapper.execute(fii['name'], forecast)
         sort = lambda fii: fii.score()
 
         with ThreadPoolExecutor(max_workers=None) as executor:
              fiis = list(executor.map(scrap, fiis_collection))
              fiis.sort(key=sort, reverse=True)
              return fiis
+
+    def get_all_fii(self):
+        return self.get_all_fii_with_forecast()
