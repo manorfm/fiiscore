@@ -7,16 +7,19 @@ class Indicator:
         self.value = self.__toDecimal(value)
 
     def __numberExpander(self, number, original):
-        if "bi" in original:
+        if "B" in original:
             return number * 10**9
-        elif "mi" in original:
+        elif "M" in original:
             return number * 10**6
+        elif "K" in original:
+            return number * 10**3
         return number
 
     def __toDecimal(self, value):
         if isinstance(value, int | float):
             return value
-        decimalStr = re.sub(r"[R$|%|bi|mi|\.]", "", value).replace(',', '.')
+        decimalStr = re.sub(r"[R$|%|B|M|K|\.]", "", value).replace(',', '.')
+        print(f"opa {decimalStr} and {value}")
         return self.__numberExpander(Decimal(decimalStr), value)
         
     def __str__(self):

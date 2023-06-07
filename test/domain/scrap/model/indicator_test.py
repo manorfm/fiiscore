@@ -11,14 +11,19 @@ def testValueIndicatorShouldBeDecimal():
     indicator = Indicator("test", "10,0")
     assert indicator.value == 10
 
+def testValueIndicatorWithKStringToBeExpanded():
+    "given value when have 'k' on it then should expanded to hundred"
+    indicator = Indicator("test", "10 K")
+    assert indicator.value == 10_000
+
 def testValueIndicatorWithMiStringToBeExpanded():
-    "given value when have mi on it then should expanded to milion"
-    indicator = Indicator("test", "10 mi")
+    "given value when have 'm' on it then should expanded to milion"
+    indicator = Indicator("test", "10 M")
     assert indicator.value == 10_000_000
 
 def testValueIndicatorWithBiStringToBeExpanded():
-    "given value when have bi on it then should expanded to bilion"
-    indicator = Indicator("test", "10 bi")
+    "given value when have 'b' on it then should expanded to bilion"
+    indicator = Indicator("test", "10 B")
     assert indicator.value == 10_000_000_000
 
 def testValueIndicatorWithRealSymbolShouldBeRemoved():

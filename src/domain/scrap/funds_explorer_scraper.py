@@ -7,14 +7,14 @@ from src.domain.scrap.fii_not_fount_exception import FIINotFoundException
 class FundsExplorerScrapper:
     __base = "https://www.fundsexplorer.com.br/funds/"
 
-    def __getValue(self, div_indicator, class_):
-        return div_indicator.find("span", class_=class_).get_text().strip()
+    def __getValue(self, p):
+        return p.get_text().strip()
 
     def __get_indicators(self, fii, page):
-        main = page.find('div', id="main-indicators-carousel")
+        main = page.find('div', id="indicators")
 
         if main is not None:
-           return main.find_all("div", class_="carousel-cell")
+           return main.find_all("div", class_="indicators__box")
 
         raise FIINotFoundException(f"FII {fii} not found!")
 
@@ -24,7 +24,14 @@ class FundsExplorerScrapper:
         return BeautifulSoup(page.content, "html.parser")
 
     def __get_price(self, page):
-        return page.find('div', id="stock-price")
+        div = page.find('div', {"class": "headerTicker__content__price"})
+        return div.p
+
+    def __extract_indicator(self, box):
+        fields = box.find_all('p')
+        name = self.__getValue(fields[0])
+        value = self.__getValue(fields[1])
+        return Indicator(name, value)
 
     def execute(self, fii):
         page = self.__get_page(fii)
@@ -32,12 +39,10 @@ class FundsExplorerScrapper:
 
         indicators: list[Indicator] = []
         for div_indicator in div_indicators:
-            name = self.__getValue(div_indicator, "indicator-title")
-            value = self.__getValue(div_indicator, "indicator-value")
-            indicators.append(Indicator(name, value))
+            indicators.append(self.__extract_indicator(div_indicator))
 
         price_indicator = self.__get_price(page)
-        price = self.__getValue(price_indicator, "price")
+        price = self.__getValue(price_indicator)
 
         indicators.append(Indicator("Price", price))
 
