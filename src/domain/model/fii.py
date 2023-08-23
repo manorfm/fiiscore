@@ -1,11 +1,12 @@
 from decimal import Decimal
 class FII:
-    def __init__(self, name, price, lastIncome, dividendYield, pvp, forecast: float = 0.0):
+    def __init__(self, name, price, lastIncome, dividendYield, pvp, url, forecast: float = 0.0):
         self.name = name
         self.price = float(price)
         self.lastIncome = float(lastIncome)
         self.dividendYield = float(dividendYield)
         self.pvp = float(pvp)
+        self.url = url
 
         if (forecast > 0.0):
             self.qnt: int = forecast // self.price
@@ -20,14 +21,15 @@ class FII:
         return round(score* 1000, 2)
 
 class FIIBuilder:
-    def __init__(self, name, forecast: float):
+    def __init__(self, name, url, forecast: float):
         self.name = name
         self.forecast = forecast
         self.lastIncome: float = 0.0
         self.dividendYield: float = 0.0
         self.price: float = 0.0
         self.pvp: float = 0.0
+        self.url = url
 
     def build(self)-> FII:
-        return FII(self.name, self.price, self.lastIncome, self.dividendYield, self.pvp, self.forecast)
+        return FII(self.name, self.price, self.lastIncome, self.dividendYield, self.pvp, self.url, self.forecast)
 

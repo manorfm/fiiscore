@@ -5,6 +5,7 @@ def testGetHeaderOfFoundsExplorerScrapper():
     scraper = FundsExplorerScrapper()
     fii = scraper.execute("hgre11")
     assert fii.name == "hgre11"
+    assert fii.url == "https://www.fundsexplorer.com.br/funds/hgre11"
     #assert fii.price == 0.0
     #assert fii.lastIncome == 0.0
     #assert fii.dividendYield == 0.0

@@ -12,6 +12,7 @@ class FIIOutput(OutputModel):
     dividendYield: float | None = None
     pvp: float | None = None
     score: float | None = None
+    url: str | None = None
 
 class FIIForecastOutput(OutputModel):
     name: str
@@ -22,3 +23,4 @@ class FIIForecastOutput(OutputModel):
     score: float | None = None
     qnt: int | None = None
     forecast: str | None = None
+    url: str | None = None

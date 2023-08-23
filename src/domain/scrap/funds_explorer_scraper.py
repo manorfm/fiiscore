@@ -46,4 +46,4 @@ class FundsExplorerScrapper:
 
         indicators.append(Indicator("Price", price))
 
-        return FIIScrapped(fii, indicators, forecast).to_fii()
+        return FIIScrapped(fii, indicators, f"{self.__base}{fii}", forecast).to_fii()
