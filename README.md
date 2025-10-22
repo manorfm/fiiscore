@@ -1,30 +1,80 @@
-# FII Score
-Aplicação para pontuar qual FII está melhor analisando alguns parâmentros fundamentais:
+# FII Score: Análise Fundamentalista de Fundos Imobiliários
 
+O **FII Score** é uma aplicação de análise que avalia e pontua Fundos de Investimento Imobiliário (FIIs) com base em múltiplos indicadores fundamentalistas. O objetivo é fornecer uma visão clara e baseada em dados para auxiliar na tomada de decisões de investimento, com foco em segurança e desempenho a longo prazo.
 
-> Quanto maior for o `último rendimento` e `dividend yield` melhor a pontuação se torna quando maior for `preço` e o `pvp` mais pra baixo essa pontuação se torna, ou seja, > `preços` e `pvp` altos puxam a pontuação para baixo e `último rendimento` e a percentagem de `dividendo yield` puxa a pontuação para cima.
+## ✨ Recursos Principais
 
-<br>
+- **Análise Multifatorial Sofisticada:** O score não se baseia apenas em preço ou dividendos. Ele utiliza um modelo ponderado e normalizado que considera:
+  - **Dividend Yield:** Potencial de geração de renda.
+  - **P/VP (Preço / Valor Patrimonial):** Métrica de valuation.
+  - **Vacância:** Saúde e ocupação dos imóveis.
+  - **Liquidez Diária:** Facilidade de compra e venda das cotas.
+  - **Quantidade de Ativos:** Nível de diversificação do fundo.
+- **Normalização Inteligente:** Cada indicador é normalizado para uma escala de 0 a 1, garantindo que nenhuma métrica distorça a análise.
+- **Sistema de Classificação:** Com base no score final, os FIIs são classificados em:
+  - **Recomendado:** FIIs com ótimos indicadores.
+  - **Neutro:** FIIs com indicadores medianos.
+  - **Não Recomendado:** FIIs que exigem cautela.
+- **API RESTful:** Todos os dados e análises podem ser consumidos via uma API FastAPI, permitindo a integração com outras ferramentas.
 
-### Subir banco de dados da aplicação
-```cmd
-docker-compose up
+## 🛠️ Tecnologias Utilizadas
+
+- **Backend:** Python, FastAPI
+- **Gerenciador de Dependências:** Poetry
+- **Banco de Dados:** MongoDB
+- **Testes:** Pytest, Unittest.mock
+
+## 🚀 Como Começar
+
+Siga os passos abaixo para configurar e executar o projeto localmente.
+
+### 1. Pré-requisitos
+
+- Python 3.10+
+- Docker e Docker Compose
+- Poetry
+
+### 2. Clone o Repositório
+
+```bash
+git clone <URL_DO_REPOSITÓRIO>
+cd fii-score
 ```
 
-### Setup da aplicação
-Poetry como gerenciador de dependências instala todos os pacotes necessários da aplicação
+### 3. Suba o Banco de Dados
 
-```cmd
-poetry install 
+A aplicação utiliza um container Docker com MongoDB. Para iniciá-lo, execute:
+
+```bash
+docker-compose up -d
+```
+O `-d` executa o container em modo detached (em segundo plano).
+
+### 4. Instale as Dependências
+
+Use o Poetry para instalar todas as dependências do projeto:
+
+```bash
+poetry install --no-root
 ```
 
-Como resultado ele vai instalar:
-- fastapi
-- uvicorn
-- pymongo
+### 5. Inicie a Aplicação
 
+Com o ambiente configurado, inicie o servidor FastAPI:
 
-### Iniciar a aplicação
-```shell
-uvicorn main:app --reload
+```bash
+poetry run uvicorn app:app --reload
 ```
+A aplicação estará disponível em `http://127.0.0.1:8000`.
+
+## ✅ Como Executar os Testes
+
+Para garantir a qualidade e a integridade do código, a aplicação possui uma suíte de testes completa. Para executá-la, use o comando:
+
+```bash
+poetry run pytest
+```
+
+##
+Swagger
+http://127.0.0.1:8000/docs

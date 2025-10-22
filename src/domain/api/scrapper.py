@@ -4,6 +4,7 @@ from src.domain.api.input import FIIInput, FIIForecastInput
 from src.domain.api.output import FIIOutput, FIIForecastOutput
 from src.domain.service.fii_service import FIIService
 from src.domain.service.fii_duplicated_exception import FIIDuplicatedException
+from src.domain.service.fundamental_analysis_service import FundamentalAnalysisService
 
 router = APIRouter()
 
@@ -34,4 +35,5 @@ def __to_response(fiis):
     return [*map(lambda fii: __to_response_object(fii), fiis)]
     
 def __to_response_object(fii):
-    return { **vars(fii), "score": fii.score() }
+    analysis_service = FundamentalAnalysisService()
+    return { **vars(fii), "score": analysis_service.calculate_score(fii) }
