@@ -1,6 +1,7 @@
 from src.domain.scrap.funds_explorer_scraper import FundsExplorerScrapper
 from src.domain.repository.fii_repository import FIIRepository
 from src.domain.service.fii_duplicated_exception import FIIDuplicatedException
+from src.domain.service.fundamental_analysis_service import FundamentalAnalysisService
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
@@ -23,10 +24,12 @@ class FIIService:
         
         if len(fiis_collection) == 0:
             return None
-        
+
         scrapper = FundsExplorerScrapper()
+        analysis_service = FundamentalAnalysisService()
+
         scrap = lambda fii : scrapper.execute(fii['name'], forecast)
-        sort = lambda fii: fii.score()
+        sort = lambda fii: analysis_service.calculate_score(fii)
 
         with ThreadPoolExecutor(max_workers=None) as executor:
              fiis = list(executor.map(scrap, fiis_collection))

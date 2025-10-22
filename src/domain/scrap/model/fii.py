@@ -21,8 +21,11 @@ class FIIScrapped:
                 builder.price = indicator.value
             elif indicator.name == "P/VP":
                 builder.pvp = indicator.value
+            elif indicator.name == "Liquidez Diária":
+                builder.daily_liquidity = indicator.value
+            elif indicator.name == "Vacância":
+                builder.vacancy = indicator.value
+            elif indicator.name == "Quantidade de ativos":
+                builder.asset_amount = indicator.value
         
         return builder.build()
-    
-
-
